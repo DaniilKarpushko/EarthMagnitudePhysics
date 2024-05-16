@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="@Url.Content("~/css/site.css")" rel="stylesheet" type="text/css"/>
+    <title>Earth magnitude online</title>
+</head>
+<body class="body-with-image">
+<div>
+    <h1 class="header-body">Geomagnetic Induction</h1>
+</div>
+<div class="request-body">
+    @model PhysicMagnitude.Models.Entities.Point;
+    @using (Html.BeginForm("Result", "Home"))
+    {
+        <p>Latitude:</p>
+        <p>
+            <input type="number" name="latitude" step="0.1" min="-90.0" max="90.0"/>
+        </p>
+        <p>Longitude:</p>
+        <p>
+            <input type="number" name="longitude" step="0.1" min="-180.0" max="180.0"/>
+        </p>
+        <p>
+            <input type="submit" value="Send"/>
+            <input type="submit" value="Create charts" formaction="@Url.Action("Charts", "Home")"/>
+        </p>
+    }
+</div>
+</body>
+</html>

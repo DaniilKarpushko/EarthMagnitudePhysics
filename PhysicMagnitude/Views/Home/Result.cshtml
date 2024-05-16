@@ -1,0 +1,22 @@
+﻿@using PhysicMagnitude.Models.Entities
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="@Url.Content("~/css/site.css")" rel="stylesheet" type="text/css"/>
+    <title>Earth magnitude online - counted intensity</title>
+</head>
+<body class="body-with-image">
+<h1 class="header-body">Geomagnetic Induction</h1>
+<div class="response-body">
+    <p>Latitude: @ViewBag.data.Latitude, degrees </p>
+    <p>Longitude: @ViewBag.data.Longitude, degrees</p>
+    <p>@ViewBag.data.Totalintensity, nT</p>
+    <input type="submit" value="Home" onclick="location.href='@Url.Action("Home", "Home")'"/>
+</div>
+</body>
+</html>

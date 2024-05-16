@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        .container {
+            display: flex; /* Используем flexbox */
+            justify-content: space-evenly;
+            margin-top: 20px;/* Равномерно распределяем элементы по горизонтали */
+        }
+        .chart {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+    <link href="@Url.Content("~/css/site.css")" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Earth magnitude online</title>
+</head>
+<body class="body-with-image">
+<div>
+    <h1 class="header-body">Geomagnetic Induction</h1>
+</div>
+<div class="response-body">
+    <div class="container">
+        <div class="chart">
+            <canvas id="myChart" style="background: white"></canvas>
+            <script>
+            var xAxisData = @Html.Raw(Json.Serialize(ViewBag.latitudes1));
+            var yAxisData = @Html.Raw(Json.Serialize(ViewBag.intensities1));
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: xAxisData,
+                    datasets: [{
+                        label: 'Magnitude intensity with longitude=@ViewBag.longitude',
+                        data: yAxisData,
+                        backgroundColor: 'rgba(122,229,255,0.5)',
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom'
+                        },
+                        y: {
+                            type: 'linear',
+                            position: 'left'
+                        }
+                    }
+                }
+            });
+        </script>
+        </div>
+        <div class="chart">
+            <canvas id="myChart2" style="background: white"></canvas>
+            <script>
+                var xAxisData = @Html.Raw(Json.Serialize(ViewBag.longitudes2));
+                var yAxisData = @Html.Raw(Json.Serialize(ViewBag.intensities2));
+
+                var ctx = document.getElementById('myChart2').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: xAxisData,
+                        datasets: [{
+                            label: 'Magnitude intensity with latitude=@ViewBag.latitude',
+                            data: yAxisData,
+                            backgroundColor: 'rgba(122,229,255,0.5)',
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                position: 'bottom'
+                            },
+                            y: {
+                                type: 'linear',
+                                position: 'left'
+                            }
+                        }
+                    }
+                });
+            </script>
+        </div>
+    </div>
+    <input type="submit" value="Home" onclick="location.href='@Url.Action("Home", "Home")'"/>
+</div>
+</body>
+</html>
